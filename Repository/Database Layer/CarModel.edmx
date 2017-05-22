@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RossDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Car">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="companyName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="modelName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="engineCapacity" Type="float" Nullable="false" />
+          <Property Name="enginePower" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Driver">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fullName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="drivingLicenceNumber" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="drivingLicenceDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DriverCar">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="purchaseDate" Type="date" Nullable="false" />
+          <Property Name="driverId" Type="int" Nullable="false" />
+          <Property Name="carId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CarId">
+          <End Role="Car" Type="Self.Car" Multiplicity="1" />
+          <End Role="DriverCar" Type="Self.DriverCar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Car">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DriverCar">
+              <PropertyRef Name="carId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DriverId">
+          <End Role="Driver" Type="Self.Driver" Multiplicity="1" />
+          <End Role="DriverCar" Type="Self.DriverCar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Driver">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DriverCar">
+              <PropertyRef Name="driverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RossDBModelStoreContainer">
+          <EntitySet Name="Car" EntityType="Self.Car" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Driver" EntityType="Self.Driver" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DriverCar" EntityType="Self.DriverCar" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CarId" Association="Self.FK_CarId">
+            <End Role="Car" EntitySet="Car" />
+            <End Role="DriverCar" EntitySet="DriverCar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DriverId" Association="Self.FK_DriverId">
+            <End Role="Driver" EntitySet="Driver" />
+            <End Role="DriverCar" EntitySet="DriverCar" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RossDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Car">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="companyName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="modelName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="engineCapacity" Type="Double" Nullable="false" />
+          <Property Name="enginePower" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DriverCars" Relationship="Self.FK_CarId" FromRole="Car" ToRole="DriverCar" />
+        </EntityType>
+        <EntityType Name="Driver">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="fullName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="drivingLicenceNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="drivingLicenceDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="DriverCars" Relationship="Self.FK_DriverId" FromRole="Driver" ToRole="DriverCar" />
+        </EntityType>
+        <EntityType Name="DriverCar">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="purchaseDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="driverId" Type="Int32" Nullable="false" />
+          <Property Name="carId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Car" Relationship="Self.FK_CarId" FromRole="DriverCar" ToRole="Car" />
+          <NavigationProperty Name="Driver" Relationship="Self.FK_DriverId" FromRole="DriverCar" ToRole="Driver" />
+        </EntityType>
+        <Association Name="FK_CarId">
+          <End Role="Car" Type="Self.Car" Multiplicity="1" />
+          <End Role="DriverCar" Type="Self.DriverCar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Car">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DriverCar">
+              <PropertyRef Name="carId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DriverId">
+          <End Role="Driver" Type="Self.Driver" Multiplicity="1" />
+          <End Role="DriverCar" Type="Self.DriverCar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Driver">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DriverCar">
+              <PropertyRef Name="driverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RossDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cars" EntityType="Self.Car" />
+          <EntitySet Name="Drivers" EntityType="Self.Driver" />
+          <EntitySet Name="DriverCars" EntityType="Self.DriverCar" />
+          <AssociationSet Name="FK_CarId" Association="Self.FK_CarId">
+            <End Role="Car" EntitySet="Cars" />
+            <End Role="DriverCar" EntitySet="DriverCars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DriverId" Association="Self.FK_DriverId">
+            <End Role="Driver" EntitySet="Drivers" />
+            <End Role="DriverCar" EntitySet="DriverCars" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RossDBModelStoreContainer" CdmEntityContainer="RossDBEntities">
+          <EntitySetMapping Name="Cars">
+            <EntityTypeMapping TypeName="RossDBModel.Car">
+              <MappingFragment StoreEntitySet="Car">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="companyName" ColumnName="companyName" />
+                <ScalarProperty Name="modelName" ColumnName="modelName" />
+                <ScalarProperty Name="engineCapacity" ColumnName="engineCapacity" />
+                <ScalarProperty Name="enginePower" ColumnName="enginePower" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Drivers">
+            <EntityTypeMapping TypeName="RossDBModel.Driver">
+              <MappingFragment StoreEntitySet="Driver">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fullName" ColumnName="fullName" />
+                <ScalarProperty Name="drivingLicenceNumber" ColumnName="drivingLicenceNumber" />
+                <ScalarProperty Name="drivingLicenceDate" ColumnName="drivingLicenceDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DriverCars">
+            <EntityTypeMapping TypeName="RossDBModel.DriverCar">
+              <MappingFragment StoreEntitySet="DriverCar">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="purchaseDate" ColumnName="purchaseDate" />
+                <ScalarProperty Name="driverId" ColumnName="driverId" />
+                <ScalarProperty Name="carId" ColumnName="carId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Repository.Database_Layer.Car>
+@using RossmanMVC.Properties
+@{
+    ViewBag.Title = Resources.driverList;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>@ViewBag.Title</h2>
+
+@Html.ActionLink(Resources.create, "Create", "Car")
+<table class="table">
+    <tr>
+        <th>
+           Marka
+        </th>
+        <th>
+            Model
+        </th>
+        <th>
+            Poj. silnika
+        </th>
+        <th>
+            Moc silnika
+        </th>
+        <th></th>
+    </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.companyName
+                </td>
+                <td>
+                    @item.modelName
+                </td>
+                <td>
+                    @item.engineCapacity
+                </td>
+                <td>
+                    @item.enginePower
+                </td>
+                <td>
+                    @Html.ActionLink(Resources.details, "Details", new { id = item.id }) |
+                    @Html.ActionLink(Resources.delete, "Delete", new { id = item.id })
+                </td>
+            </tr>
+        }
+
+</table>
