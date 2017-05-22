@@ -97,6 +97,15 @@ namespace RossmanMVC.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dodaj Alfę.
+        /// </summary>
+        public static string createAlfa {
+            get {
+                return ResourceManager.GetString("createAlfa", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dodaj nowe auto.
         /// </summary>
         public static string createCar {
@@ -111,6 +120,15 @@ namespace RossmanMVC.Properties {
         public static string createDriver {
             get {
                 return ResourceManager.GetString("createDriver", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dodaj Merca.
+        /// </summary>
+        public static string createMercedes {
+            get {
+                return ResourceManager.GetString("createMercedes", resourceCulture);
             }
         }
         

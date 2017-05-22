@@ -126,6 +126,12 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builders\AlfaRomeoBuilder.cs" />
+    <Compile Include="Builders\MercedesBuilder.cs" />
+    <Compile Include="Directors\CarDirector.cs" />
+    <Compile Include="Factories\CarFactory.cs" />
+    <Compile Include="Interfaces\ICarFactory.cs" />
+    <Compile Include="Interfaces\CarBuilder.cs" />
     <Compile Include="Interfaces\ICarManager.cs" />
     <Compile Include="Interfaces\IDriverManager.cs" />
     <Compile Include="Managers\CarManager.cs" />
@@ -138,6 +144,7 @@
       <Name>Repository</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

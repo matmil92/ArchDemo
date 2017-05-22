@@ -12,6 +12,7 @@ namespace Core.Interfaces
         List<Car> GetCarList();
         Car GetCarDetails(int id);
         Boolean AddNewCar(Car car);
+        Boolean AddNewCarFromBuilder(int id);
         Boolean DeleteCar(int id);
         Boolean AddDriverToCar(int carId, int driverId); 
     }

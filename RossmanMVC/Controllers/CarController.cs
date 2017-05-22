@@ -19,8 +19,13 @@ namespace RossmanMVC.Controllers
         {
             return View(iCarManager.GetCarList());
         }
-        public ActionResult Create()
+        public ActionResult Create(int? version)
         {
+            if(version!=null)
+            {
+                iCarManager.AddNewCarFromBuilder(version.Value);
+                return RedirectToAction("Index");
+            }
             return View(new Car());
         }
         [HttpPost]

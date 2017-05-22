@@ -6,6 +6,9 @@ using System.Web;
 using Repository.Database_Layer;
 using Repository.Interfaces;
 using Repository.Repositores;
+using Core.Builders;
+using Core.Directors;
+using Core.Factories;
 
 namespace Core.Managers
 {
@@ -28,6 +31,12 @@ namespace Core.Managers
         public bool AddNewCar(Car car)
         {
            return _iCar.AddNewCar(car);
+        }
+
+        public bool AddNewCarFromBuilder(int id)
+        {
+            ICarFactory factory = new CarFactory();
+            return AddNewCar(factory.GetCarFromBuilder(id));
         }
 
         public bool DeleteCar(int id)

@@ -129,11 +129,17 @@
   <data name="create" xml:space="preserve">
     <value>Stwórz</value>
   </data>
+  <data name="createAlfa" xml:space="preserve">
+    <value>Dodaj Alfę</value>
+  </data>
   <data name="createCar" xml:space="preserve">
     <value>Dodaj nowe auto</value>
   </data>
   <data name="createDriver" xml:space="preserve">
     <value>Dodaj nowego kierowcę</value>
+  </data>
+  <data name="createMercedes" xml:space="preserve">
+    <value>Dodaj Merca</value>
   </data>
   <data name="delete" xml:space="preserve">
     <value>Usuń</value>

@@ -7,6 +7,8 @@
 <h2>@ViewBag.Title</h2>
 
 @Html.ActionLink(Resources.create, "Create", "Car")
+@Html.ActionLink(Resources.createAlfa, "Create", "Car", new { version = 0 }, null)
+@Html.ActionLink(Resources.createMercedes, "Create", "Car", new { version = 1 }, null)
 <table class="table">
     <tr>
         <th>
