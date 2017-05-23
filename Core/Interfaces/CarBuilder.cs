@@ -19,5 +19,6 @@ namespace Core.Interfaces
             return car;
         }
         public abstract void SetNewModelName();
+        public abstract void SetNewEngineProperties();
     }
 }

@@ -20,6 +20,7 @@ namespace Core.Directors
         {
             carBuilder.CreateCar();
             carBuilder.SetNewModelName();
+            carBuilder.SetNewEngineProperties();
         }
         public Car GetCar()
         {

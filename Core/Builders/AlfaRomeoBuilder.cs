@@ -8,12 +8,16 @@ namespace Core.Builders
 {
     public class AlfaRomeoBuilder : CarBuilder
     {
+        public override void SetNewEngineProperties()
+        {
+            car.engineCapacity = 3.2;
+            car.enginePower = 240;
+        }
+
         public override void SetNewModelName()
         {
             car.companyName = "Alfa Romeo";
             car.modelName = "Gullia";
-            car.engineCapacity = 3.2;
-            car.enginePower = 240;
         }
     }
 }

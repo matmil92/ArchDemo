@@ -33,10 +33,10 @@ namespace Core.Managers
            return _iCar.AddNewCar(car);
         }
 
-        public bool AddNewCarFromBuilder(int id)
+        public bool AddNewCarFromBuilder(int version)
         {
             ICarFactory factory = new CarFactory();
-            return AddNewCar(factory.GetCarFromBuilder(id));
+            return AddNewCar(factory.GetCarFromBuilder(version));
         }
 
         public bool DeleteCar(int id)
